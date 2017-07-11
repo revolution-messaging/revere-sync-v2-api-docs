@@ -1,5 +1,7 @@
 @charset "utf-8";
 @import 'normalize';
+@import 'logo-modifications';
+@import 'lang-selector';
 @import 'variables';
 @import 'icon-font';
 
@@ -361,8 +363,6 @@ html, body {
     border-bottom: 1px solid #ccc;
     margin-bottom: $h1-margin-bottom;
     margin-top: 2em;
-    border-top: 1px solid #ddd;
-    background-image: linear-gradient(to bottom, #fff, #f9f9f9);
   }
 
   h1:first-child, div:first-child + h1 {
@@ -470,6 +470,7 @@ html, body {
   aside {
     padding-top: 1em;
     padding-bottom: 1em;
+    color:white;
     text-shadow: 0 1px 0 lighten($aside-notice-bg, 15%);
     margin-top: 1.5em;
     margin-bottom: 1.5em;
@@ -555,7 +556,7 @@ html, body {
       background-color: $code-annotation-bg;
       border-radius: 5px;
       padding: $code-annotation-padding;
-      color: #ccc;
+      color: #fff;
       border-top: 1px solid #000;
       border-bottom: 1px solid #404040;
     }
