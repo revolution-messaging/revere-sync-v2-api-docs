@@ -1,23 +1,15 @@
 ---
-title: API Reference Template
+title: API Reference
 
 language_tabs:
   - shell
-  - ruby
-  - python
   - javascript
-  - php
-
-toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
 
 includes:
-  - introduction
   - authentication
   - errors
-  - api/persons
+  - entry
+  - api/people
 
 search: true
 ---
-
-<!-- This should always be empty, use includes for proper order -->
