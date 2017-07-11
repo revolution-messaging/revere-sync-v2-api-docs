@@ -46,5 +46,9 @@ Before pushing documentation to a repository please build and commit the build f
 To build your documentation with docker run:
 
 ```
+<<<<<<< HEAD
 docker run --rm -v $PWD:/usr/src/app/source -w /usr/src/app/source reveresyncv2apidocs_app bundle exec middleman build --clean
+=======
+docker run --rm -v $PWD:/usr/src/app/source -w /usr/src/app/source <docker app name from docker ps> bundle exec middleman build --clean
+>>>>>>> d9bfdab68347aceb0196625ec827c979ea1717a1
 ```
