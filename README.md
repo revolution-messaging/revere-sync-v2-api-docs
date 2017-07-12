@@ -3,16 +3,16 @@
   <br>
 </p>
 
-<p align="center"><img src="./source/images/template_screenshot.png" width=700 alt="Screenshot of Example Documentation created with Slate"></p>
+<p align="center"><img src="./source/images/revere_sync_docs_screenshot.png" width=700 alt="Screenshot of Example Documentation created with Slate"></p>
 
 <p align="center"><em>The example above was created with Slate. Check it out at <a href="https://lord.github.io/slate">lord.github.io/slate</a>.</em></p>
 
 # Introduction
 
-This is a template for API documentation for anything publicly and internally exposed in Revere. It is based on [slate](https://github.com/lord/slate). 
+This is Revere Sync's API documentation for anything publicly and internally exposed in Revere. It is based on [slate](https://github.com/lord/slate). 
 
 # Purpose 
-This exists to create a consistent api doc between all revere products. We can own this documentation. 
+This exists to create a consistent api doc between all revere products. We can own this documentation. This one is for Revere Sync.
 
 
 # Contributing
@@ -23,7 +23,7 @@ Please feel free to contribute and follow the development setup below! **Fork th
 First clone this project 
 
 ```
-git clone https://github.com/revolution-messaging/revere-api-documentation-template.git && cd revere-api-documentation-template
+git clone https://github.com/revolution-messaging/revere-sync-v2-api-docs.git && cd revere-sync-v2-api-docs
 ```
 
 A Dockerfile, and a docker-compose files are provided for setting up and running a development environment. If you're familiar with docker you can skim over the details.
@@ -46,9 +46,5 @@ Before pushing documentation to a repository please build and commit the build f
 To build your documentation with docker run:
 
 ```
-<<<<<<< HEAD
 docker run --rm -v $PWD:/usr/src/app/source -w /usr/src/app/source reveresyncv2apidocs_app bundle exec middleman build --clean
-=======
-docker run --rm -v $PWD:/usr/src/app/source -w /usr/src/app/source <docker app name from docker ps> bundle exec middleman build --clean
->>>>>>> d9bfdab68347aceb0196625ec827c979ea1717a1
 ```
