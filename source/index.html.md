@@ -10,6 +10,7 @@ includes:
   - errors
   - entry
   - api/people
+  - constituent
 
 search: true
 ---

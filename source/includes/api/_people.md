@@ -272,7 +272,7 @@ request(options, function (error, response, body) {
 
 ### Post Parameters
 
-Post Parameters       | Type    | Required  | Description
+Properties            | Type    | Required  | Description
 --------------------- | ------- |---------- |-----------
 given_name            | string  |   true    | First Name or Given Name of a Person.
 family_name           | string  |   true    | Family or Last Name of a Person.
