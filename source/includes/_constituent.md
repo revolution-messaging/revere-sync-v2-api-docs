@@ -83,7 +83,7 @@ request(options, function (error, response, body) {
 | -------------- | ------ | -------- | ------------------------------- 
 | access_token   | String | True     | Access Token Hash  
 
-At least one paramater is required to post data. Below are the allowed fields for a constituent. **The tag parameter is required to activate the triggers which will forward information to Sync's integrations.**
+At least one paramater is required to post data. Below are the allowed fields for a constituent. **The tag parameter is required to activate the triggers which will forward information to Sync's integrations.** Each tag can be a string or an array of strings.
 
 ### Post Parameters
 
