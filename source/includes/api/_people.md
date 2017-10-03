@@ -318,12 +318,12 @@ Properties         | Type    | Required  | Description
 primary            | boolean | false     | True if this is as a primary address, can only have one primary address
 address_type       | string  | false     | The type of address. One of “Home”, “Work”, or “Mailing”.
 venue              | string  | false     | Optional venue name at the address, useful for names of buildings. ex: Smith Hall)
-addressLine1       | string  | true      | Primary Address Line 
+addressLine1       | string  | false     | Primary Address Line 
 addressLine2       | string  | false     | Secondary Address Line
 addressLine3       | string  | false     | Final Address Line
 locality           | string  | false     | A city or other local administrative area.
 region             | string  | false     | State or subdivision codes according to ISO 3166-2 Final 2 alpha digits). 
-postal_code        | string  | true      | Five or Nine digit US postal code.
+postal_code        | string  | false      | Five or Nine digit US postal code.
 country            | string  | false     | The country code according to ISO 3166-1 Alpha-2.
 language           | string  | false     | Language in which the address is recorded – language code according to ISO 639. 
 location           | object  | false     | `{ latitude: number,  longitude: number, accuracy:"Rooftop" or "Approximate" }`
