@@ -5,6 +5,7 @@ the `Accept` header must be supplied with `application/vnd.sync.v2+json+hal` to 
 
 You can get your `api key` per user with your instance of Sync. 
 
+### HTTP Request
 `POST https://sync.revmsg.net/api/authenticate`
 
 ```shell

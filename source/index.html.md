@@ -11,6 +11,7 @@ includes:
   - entry
   - api/people
   - constituent
+  - services/revere_mobile_services
 
 search: true
 ---

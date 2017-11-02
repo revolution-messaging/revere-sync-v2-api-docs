@@ -7,6 +7,9 @@
 Constituents are a legacy actor in Sync and actions by triggers are preformed on them.
 It is possible to create constituents with `GET` and `PUT` requests but this method is highly discouraged and only exists for backwards compatibility with V1. All constituents should be created using the `POST` method. This endpoint is used by Sync V2 forms and should be used if creating a custom interaction with Sync V2.
 
+### HTTP Request
+`POST https://sync.revmsg.net/constituent/{access_token}`
+
 ## Create a constituent
 ```shell
 curl -X POST \

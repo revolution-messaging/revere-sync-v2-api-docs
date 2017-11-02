@@ -10,6 +10,7 @@ This route is desiged to create or update a person. The match is based on four p
 
 Currently we support an auto respoonse using a `mobile_flow_id`. When provided this trigger will subscribe the `primary_phone_number` to a mobile list.
 
+### HTTP Request
 `POST https://sync.revmsg.net/api/people/person_signup_helper`
 
 ```shell
@@ -346,7 +347,7 @@ This route is desiged to create or match a person. The match is based on four pa
 
 A person will be returned with standard OSDI fields but will also contain extra due to the naming scheme of our internal systems. Both can be used but OSDI 1.1 fields are recomended.
 
-
+### HTTP Request
 `POST https://sync.revmsg.net/api/people`
 
 ```shell
@@ -623,9 +624,10 @@ Note: `primary:true` should be the first item in the list of `email_addresses`, 
 ## Get Page of People 
 
 This route will allow you to fetch up to 10 person records at a time. You can increment the pages 
-by providing a `?page=<number>` query string.
+by providing a `?page={page_number}` query string.
 
-`GET https://sync.revmsg.net/people/:revere_sync_id`
+### HTTP Request
+`GET https://sync.revmsg.net/people/{revere_sync_id}`
 
 ```shell
 curl "https://sync.revmsg.net/api/people"
@@ -818,11 +820,12 @@ request(options, function (error, response, body) {
 
 Parameter      | Type    | Description
 -------------- | ------- | -----------
-page           | number  | The page to fetch next
+page          | number  | The page to fetch next
 
 ## Get One Person By Id
 
-`GET https://sync.revmsg.net/people/:revere_sync_id`
+### HTTP Request
+`GET https://sync.revmsg.net/people/{revere_sync_id}`
 
 ### Query Parameters
 
@@ -955,7 +958,8 @@ request(options, function (error, response, body) {
 
 ## Update One Person
 
-`PUT https://sync.revmsg.net/people/:revere_sync_id`
+### HTTP Request
+`PUT https://sync.revmsg.net/people/{revere_sync_id}`
 
 <aside class="notice">
 Revere requires at least four main parameters to create a constituent.
