@@ -45,6 +45,7 @@ var options = { method: 'POST',
   headers: 
    { 'postman-token': 'e072e825-97a3-6953-5641-a75badc9dfb6',
      'content-type': 'application/json',
+     'Accept': 'application/vnd.sync.v2+json',
      'cache-control': 'no-cache' },
   body: 
    { name: 'Steve Bob',

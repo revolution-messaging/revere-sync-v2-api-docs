@@ -200,7 +200,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;html&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,6 +211,7 @@
       <img src="images/logo.png" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="html">html</a>
               <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
@@ -1891,6 +1892,7 @@ It is possible to create constituents with <code class="prettyprint">GET</code> 
   <span class="na">headers</span><span class="p">:</span> 
    <span class="p">{</span> <span class="s1">'postman-token'</span><span class="p">:</span> <span class="s1">'e072e825-97a3-6953-5641-a75badc9dfb6'</span><span class="p">,</span>
      <span class="s1">'content-type'</span><span class="p">:</span> <span class="s1">'application/json'</span><span class="p">,</span>
+     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'application/vnd.sync.v2+json'</span><span class="p">,</span>
      <span class="s1">'cache-control'</span><span class="p">:</span> <span class="s1">'no-cache'</span> <span class="p">},</span>
   <span class="na">body</span><span class="p">:</span> 
    <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="s1">'Steve Bob'</span><span class="p">,</span>
@@ -2571,10 +2573,487 @@ This requires a Revere Mobile Service to operate.</p>
     </span><span class="s2">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;Mobile alerts from Example Client messages. Msg &amp;amp; data rates may apply.&lt;b&gt;Text STOP to 62262 to stop receiving messages.Text HELP to 62262 for more information.&lt;/b&gt;&lt;br&gt; &lt;a href=</span><span class="se">\"</span><span class="s2">https://sync.revmsg.net/public/terms-and-conditions/8b242a3e-3e33-4954-8b01-64a92c9f671c/62262</span><span class="se">\"</span><span class="s2"> target=</span><span class="se">\"</span><span class="s2">_blank</span><span class="se">\"</span><span class="s2">&gt;Terms &amp;amp; Conditions&lt;/a&gt;"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+          <h1 id="v1-forms">V1 Forms</h1>
+
+<p>This is a legacy API, please use <a href="#v2-forms">V2 Forms</a> if possible.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>These forms consist of HTML and JavaScript components.
+A sample form would start as:</p>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"revmsg-wrapper"</span><span class="nt">&gt;</span> 
+ <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"revmsg-form"</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">action=</span><span class="s">"https://sync.revmsg.net/constituent/&lt;access token&gt;/"</span> <span class="na">name=</span><span class="s">"revmsg-form"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"revmsg-failure"</span> <span class="na">style=</span><span class="s">"display: none;"</span><span class="nt">&gt;</span>Sorry, but we failed to add you to the list. Please try again or contact <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"tel:+18887806763"</span><span class="nt">&gt;</span>1.888.780.6763<span class="nt">&lt;/a&gt;&lt;/div&gt;</span> 
+<span class="nt">&lt;fieldset</span> <span class="na">id=</span><span class="s">"signup"</span><span class="nt">&gt;</span> 
+
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"phone"</span><span class="nt">&gt;</span>Cell Phone Number<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"cellphone"</span> <span class="na">name=</span><span class="s">"phone"</span> <span class="na">placeholder=</span><span class="s">"Cell Phone Number"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+
+ <span class="nt">&lt;/fieldset&gt;</span> 
+
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"triggers"</span> <span class="na">value=</span><span class="s">"example_trigger"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"revmsg-submit-btn"</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span> 
+
+ <span class="nt">&lt;/form&gt;</span> 
+
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"revmsg-fdbk"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"revmsg-loading"</span> <span class="na">style=</span><span class="s">"display: none;"</span><span class="nt">&gt;</span>...loading<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"revmsg-success"</span> <span class="na">style=</span><span class="s">"display: none;"</span><span class="nt">&gt;</span>Thanks for signing up!<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+     <span class="nt">&lt;/div&gt;</span>
+ <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://sync.revmsg.net/form/&lt;FULL FORM ID&gt;"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+<p>The key components here are the HTML form with a name of <code class="prettyprint">triggers</code> that allows sync to run each service setup.
+These form are generated and provided to you in general so you will not have to write this html or enter the Form ID.
+If you require more customization the <a href="#constitutent">constituent</a> api will be more useful.</p>
+
+<h2 id="redirects">Redirects</h2>
+
+<p>Sync V1 Forms have the ability to be configured to redirect to another page after submission. </p>
+
+<blockquote>
+<p>Ensure the <code class="prettyprint">revmsgConfig</code> is declared before the sync javascript src tag</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+  <span class="nx">revmsgConfig</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s2">"redirect"</span><span class="p">:</span> <span class="s2">"https://revolutionmessaging.com"</span>
+  <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://sync.revmsg.net/form/&lt;FULL FORM ID&gt;"</span><span class="nt">&gt;</span><span class="p">;</span><span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<h2 id="callbacks">Callbacks</h2>
+
+<p>Sync V1 Forms also fire a callback upon submission with data and error details if they exist.</p>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+<span class="nx">revmsgConfig</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">callback</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// there was a problem, do not fire conversion code.</span>
+    <span class="c1">// maybe show another error state/message</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// fire conversion pixel embed</span>
+    <span class="c1">// show a success message</span>
+    <span class="c1">// show "share this functionality"</span>
+    <span class="c1">// or other "YAY!" thing here.</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://sync.revmsg.net/form/&lt;FULL FORM ID&gt;"</span><span class="nt">&gt;</span><span class="p">;</span><span class="nt">&lt;/script&gt;</span>
+</code></pre>
+          <h1 id="v2-forms">V2 Forms</h1>
+
+<p>Developer Ready Sync Forms</p>
+
+<ul>
+<li>Server Side Configurable ⚙️</li>
+<li>Speedy Rendering 🏃‍️</li>
+<li>Built in Validation ✅</li>
+</ul>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>Sync V2 Forms are built to be backwards compatible and compatible with currently
+rendering forms that are out in the wild are designed to operate the same. This
+means that even existing forms can get the features of new ones as they are
+added.</p>
+
+<p>The most simple way to start is to let the form render itself using the
+following html.</p>
+
+<p>First ensure you have an HTML page / website you want to use your Sync form.</p>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"revere-sync"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script </span><span class="na">async</span> <span class="na">src=</span><span class="s">"https://sync.revmsg.net/form/v2/&lt;FULL FORM ID&gt;"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+<blockquote>
+<p>So an example form with an ID will look like</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"revere-sync"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script </span><span class="na">async</span> <span class="na">src=</span><span class="s">"https://sync.revmsg.net/form/v2/79826d9f-3930-4630-82ae-d1e25b5bfa6e"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+<p>The form will render in the <code class="prettyprint">innerHTML</code> of the <code class="prettyprint">#revere-sync</code> div.</p>
+
+<blockquote>
+<p>If you would like to use multiple forms per page simply create a <code class="prettyprint">div</code> with a <code class="prettyprint">data-sync-form-id=&lt;FULL FORM ID&gt;</code> attribute. For example:</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;div</span> <span class="na">data-sync-form-id=</span><span class="s">"79826d9f-3930-4630-82ae-d1e25b5bfa6e"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre>
+<p>The form will render in the <code class="prettyprint">innerHTML</code> of this <code class="prettyprint">div</code>.</p>
+
+<p><strong>If you do not include the first form with the <code class="prettyprint">id</code> of <code class="prettyprint">revere-sync</code> you will
+not be able to use multiple forms. This data structure is to allow
+non-conflicting renders with existing sync v2 forms that already are spread
+accross the web.</strong></p>
+
+<p>This is the basics of how to apply a sync form and use multiple per site.</p>
+
+<h2 id="structure-of-a-form">Structure of A Form</h2>
+
+<p>Sync V2 Forms have two structures, first is without a <code class="prettyprint">data-sync-form-id</code> these
+a fairly easy to understand.</p>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"revere-sync"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"rsform"</span> <span class="na">id=</span><span class="s">"revere-sync-form"</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">action=</span><span class="s">"https://revere-sync-v2-stage.herokuapp.com/constituent/&lt;access token&gt;"</span> <span class="na">name=</span><span class="s">"revere-sync"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform__field--required"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"name"</span> <span class="na">class=</span><span class="s">"rsform__field--label"</span><span class="nt">&gt;</span>Full Name *<span class="nt">&lt;/label&gt;</span>
+         <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"name"</span> <span class="na">class=</span><span class="s">"rsform__field--text"</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">placeholder=</span><span class="s">"Full Name"</span> <span class="na">required=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform__field--required"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"email"</span> <span class="na">class=</span><span class="s">"rsform__field--label"</span><span class="nt">&gt;</span>Email *<span class="nt">&lt;/label&gt;</span>
+         <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"email"</span> <span class="na">class=</span><span class="s">"rsform__field--email"</span> <span class="na">name=</span><span class="s">"email"</span> <span class="na">placeholder=</span><span class="s">"you@yourdomain.com"</span> <span class="na">required=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"email"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform__field"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"state"</span> <span class="na">class=</span><span class="s">"rsform__field--label"</span><span class="nt">&gt;</span>State <span class="nt">&lt;/label&gt;</span>
+         <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">"state"</span> <span class="na">class=</span><span class="s">"rsform-field--select"</span> <span class="na">name=</span><span class="s">"state"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"select-one"</span><span class="nt">&gt;</span>Select One<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"AK"</span><span class="nt">&gt;</span>AK<span class="nt">&lt;/option&gt;</span>
+            <span class="c">&lt;!-- other states here of course--&gt;</span>
+         <span class="nt">&lt;/select&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform--custom_html"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;h3&gt;</span>Some html here.<span class="nt">&lt;/h3&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform--submit"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"sync-hidden-input"</span> <span class="na">name=</span><span class="s">"tags"</span> <span class="na">value=</span><span class="s">"test_1"</span> <span class="na">type=</span><span class="s">"hidden"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"sync-hidden-input"</span> <span class="na">name=</span><span class="s">"tags"</span> <span class="na">value=</span><span class="s">"test_2"</span> <span class="na">type=</span><span class="s">"hidden"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"sync-submit-button"</span> <span class="na">class=</span><span class="s">"rsform--submit__btn"</span> <span class="na">value=</span><span class="s">"Custom Submit Text"</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+   <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+<p>The important part is to notice the <code class="prettyprint">id</code>. These are common field names that
+could conflict with <code class="prettyprint">ids</code> that already exist on the page. <code class="prettyprint">email</code> is a common
+name for an <code class="prettyprint">id</code> so if there are errors please check to see if you already have
+a conflicting <code class="prettyprint">id</code> on the page.</p>
+
+<p>The <code class="prettyprint">tags</code> of a sync form (hidden in the <code class="prettyprint">sync-hidden-input</code> class) are how
+triggers are ran. When sync accepts these sync will run the various configured
+triggers for that <code class="prettyprint">tag</code>.</p>
+
+<blockquote>
+<p>An example with two tags active on a sync form will look like:</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"revere-sync"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"rsform"</span> <span class="na">id=</span><span class="s">"revere-sync-form"</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">action=</span><span class="s">"https://revere-sync-v2-stage.herokuapp.com/constituent/&lt;access token&gt;"</span> <span class="na">name=</span><span class="s">"revere-sync"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform__field--required"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"name"</span> <span class="na">class=</span><span class="s">"rsform__field--label"</span><span class="nt">&gt;</span>Full Name *<span class="nt">&lt;/label&gt;</span>
+         <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"name"</span> <span class="na">class=</span><span class="s">"rsform__field--text"</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">placeholder=</span><span class="s">"Full Name"</span> <span class="na">required=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform__field--required"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"email"</span> <span class="na">class=</span><span class="s">"rsform__field--label"</span><span class="nt">&gt;</span>Email *<span class="nt">&lt;/label&gt;</span>
+         <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"email"</span> <span class="na">class=</span><span class="s">"rsform__field--email"</span> <span class="na">name=</span><span class="s">"email"</span> <span class="na">placeholder=</span><span class="s">"you@yourdomain.com"</span> <span class="na">required=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"email"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform__field"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"state"</span> <span class="na">class=</span><span class="s">"rsform__field--label"</span><span class="nt">&gt;</span>State <span class="nt">&lt;/label&gt;</span>
+         <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">"state"</span> <span class="na">class=</span><span class="s">"rsform-field--select"</span> <span class="na">name=</span><span class="s">"state"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"select-one"</span><span class="nt">&gt;</span>Select One<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"AK"</span><span class="nt">&gt;</span>AK<span class="nt">&lt;/option&gt;</span>
+            <span class="c">&lt;!-- other states here of course--&gt;</span>
+         <span class="nt">&lt;/select&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform--custom_html"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;h3&gt;</span>Some html here.<span class="nt">&lt;/h3&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform--submit"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"sync-hidden-input"</span> <span class="na">name=</span><span class="s">"tags"</span> <span class="na">value=</span><span class="s">"test_1"</span> <span class="na">type=</span><span class="s">"hidden"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"sync-hidden-input"</span> <span class="na">name=</span><span class="s">"tags"</span> <span class="na">value=</span><span class="s">"test_2"</span> <span class="na">type=</span><span class="s">"hidden"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"sync-submit-button"</span> <span class="na">class=</span><span class="s">"rsform--submit__btn"</span> <span class="na">value=</span><span class="s">"Custom Submit Text"</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+   <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+<h2 id="sync-v2-forms-with-data-ids">Sync V2 Forms with Data IDs</h2>
+
+<p>A <code class="prettyprint">data-sync-form-id</code> is the second type of sync form. These will have the <code class="prettyprint">id</code>
+of the form at the end of each field <code class="prettyprint">id</code> as well as on the <code class="prettyprint">form</code> itself. <strong>Stick to class names</strong> or
+<code class="prettyprint">[data-sync-form-id=&quot;&lt;FULL FORM ID&gt;&quot;] &gt; &lt;css selector&gt;</code> in you css if you need
+to style a form by it&rsquo;s <code class="prettyprint">id</code>.</p>
+
+<blockquote>
+<p>Example data-sync-form with id attached</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;div</span> <span class="na">type=</span><span class="s">"revere-sync-form"</span> <span class="na">data-sync-form-id=</span><span class="s">"79826d9f-3930-4630-82ae-d1e25b5bfa6e"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"rsform"</span> <span class="na">id=</span><span class="s">"revere-sync-form-79826d9f-3930-4630-82ae-d1e25b5bfa6e"</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">action=</span><span class="s">"https://revere-sync-v2-stage.herokuapp.com/constituent/&lt;access token&gt;"</span> <span class="na">name=</span><span class="s">"revere-sync"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform__field--required"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"name"</span> <span class="na">class=</span><span class="s">"rsform__field--label"</span><span class="nt">&gt;</span>Full Name *<span class="nt">&lt;/label&gt;</span>
+         <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"name-79826d9f-3930-4630-82ae-d1e25b5bfa6e"</span> <span class="na">class=</span><span class="s">"rsform__field--text"</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">placeholder=</span><span class="s">"Full Name"</span> <span class="na">required=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform__field--required"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"email"</span> <span class="na">class=</span><span class="s">"rsform__field--label"</span><span class="nt">&gt;</span>Email *<span class="nt">&lt;/label&gt;</span>
+         <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"email-79826d9f-3930-4630-82ae-d1e25b5bfa6e"</span> <span class="na">class=</span><span class="s">"rsform__field--email"</span> <span class="na">name=</span><span class="s">"email"</span> <span class="na">placeholder=</span><span class="s">"you@yourdomain.com"</span> <span class="na">required=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"email"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform__field"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"state"</span> <span class="na">class=</span><span class="s">"rsform__field--label"</span><span class="nt">&gt;</span>State <span class="nt">&lt;/label&gt;</span>
+         <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">"state-79826d9f-3930-4630-82ae-d1e25b5bfa6e"</span> <span class="na">class=</span><span class="s">"rsform-field--select"</span> <span class="na">name=</span><span class="s">"state"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"select-one"</span><span class="nt">&gt;</span>Select One<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"AK"</span><span class="nt">&gt;</span>AK<span class="nt">&lt;/option&gt;</span>
+            <span class="c">&lt;!-- other states here of course--&gt;</span>
+         <span class="nt">&lt;/select&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform--custom_html"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;h3&gt;</span>Some html here.<span class="nt">&lt;/h3&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform--submit"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"sync-hidden-input"</span> <span class="na">name=</span><span class="s">"tags"</span> <span class="na">value=</span><span class="s">"test_en_page_1"</span> <span class="na">type=</span><span class="s">"hidden"</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"sync-submit-button-79826d9f-3930-4630-82ae-d1e25b5bfa6e"</span> <span class="na">class=</span><span class="s">"rsform--submit__btn"</span> <span class="na">value=</span><span class="s">"Custom Submit Text"</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+   <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+<h2 id="fancy-rendering-methods">Fancy Rendering Methods</h2>
+
+<p>Since Sync forms replace the <code class="prettyprint">innerHTML</code> you can include HTML before the sync
+form will load. For example a CSS loading spinner is a great thing to place into
+a sync form.</p>
+
+<blockquote>
+<p>Place loading HTML inside the parent div</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"revere-sync"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"loader"</span><span class="nt">&gt;</span>
+   <span class="c">&lt;!-- put your fancy css loading spinner here --&gt;</span>
+  <span class="nt">&lt;/div&gt;</span> 
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+<blockquote>
+<p>with an ID</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;div</span> <span class="na">type=</span><span class="s">"revere-sync-form"</span> <span class="na">data-sync-form-id=</span><span class="s">"a66b847e-8d4c-44c4-ad13-d7d90d1d8b63"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"loader"</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- put your fancy css loading spinner here --&gt;</span>
+  <span class="nt">&lt;/div&gt;</span> 
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+<p>Sync will then replace your HTML when the form has loaded. This keeps sync forms
+compatible with most websites in terms of styles.</p>
+
+<h2 id="validation-and-required-errors">Validation and Required Errors</h2>
+
+<p>Sync forms will always apply the same classes for errors as well as add <code class="prettyprint">p</code> tags
+into the form to alert the user something is wrong.</p>
+
+<ul>
+<li>Required Fields will have a <code class="prettyprint">--required</code> class modifier on the parent of the
+<code class="prettyprint">input</code> field as well as place a <code class="prettyprint">p</code> tag with a class of
+<code class="prettyprint">rsform__field--error</code> and an error message of the required field.</li>
+</ul>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform__field--required"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"email"</span> <span class="na">class=</span><span class="s">"rsform__field--label"</span><span class="nt">&gt;</span>Email *<span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"email"</span> <span class="na">class=</span><span class="s">"rsform__field--email"</span> <span class="na">name=</span><span class="s">"email"</span> <span class="na">placeholder=</span><span class="s">"you@yourdomain.com"</span> <span class="na">required=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"email"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"email-error-missing"</span> <span class="na">class=</span><span class="s">"rsform__field--error"</span><span class="nt">&gt;</span>Email is required<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+<ul>
+<li>Invalid information such as a bad email will have an <code class="prettyprint">--invalid</code> as a class
+modifer when there is an invalid value as well as place <code class="prettyprint">p</code> tag with a class
+of <code class="prettyprint">rsform__field--error</code> and a message of the validation issue.</li>
+</ul>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"rsform__field--invalid"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"email"</span> <span class="na">class=</span><span class="s">"rsform__field--label"</span><span class="nt">&gt;</span>Email *<span class="nt">&lt;/label&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"email"</span> <span class="na">class=</span><span class="s">"rsform__field--email"</span> <span class="na">name=</span><span class="s">"email"</span> <span class="na">placeholder=</span><span class="s">"you@yourdomain.com"</span> <span class="na">required=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"email"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"email-error"</span> <span class="na">class=</span><span class="s">"rsform__field--error"</span><span class="nt">&gt;</span>Email is invalid.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+<p><strong>NOTE: These modifiers will never mix, as an empty field is not invalid if it
+is required.</strong></p>
+
+<h2 id="events">Events</h2>
+
+<p>Each Sync V2 form can trigger events on the <code class="prettyprint">document</code>.
+Examples using jQuery v2 or v3.</p>
+
+<h2 id="on-load">On Load</h2>
+
+<p>This event is fired by each form on the page after it has been written to the DOM, one for the main sync form and others with it&rsquo;s ids.</p>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"sync_form_ready"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// do something here</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<blockquote>
+<p>To listen to the event of a sync form with a <code class="prettyprint">data-sync-form-id</code>:</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"sync_form_ready-&lt;FULL FORM ID&gt;"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// do something here</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<blockquote>
+<p>in our example form</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span>
+    <span class="s2">"sync_form_ready-79826d9f-3930-4630-82ae-d1e25b5bfa6e"</span><span class="p">,</span>
+    <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// do something here</span>
+    <span class="p">}</span>
+  <span class="p">);</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<h2 id="on-submit">On Submit</h2>
+
+<p>This event fires when a user clicks the <code class="prettyprint">Submit</code> button and data is valid in the form.</p>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"sync_form_submit_start"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// do something here</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<p>To listen to the event of a sync form with a <code class="prettyprint">data-sync-form-id</code>:</p>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"sync_form_submit_start-&lt;FULL FORM ID&gt;"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// do something here</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<p>so in our example form</p>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span>
+    <span class="s2">"sync_form_submit_start-79826d9f-3930-4630-82ae-d1e25b5bfa6e"</span><span class="p">,</span>
+    <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// do something here</span>
+    <span class="p">}</span>
+  <span class="p">);</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<h2 id="on-submit-success">On Submit Success</h2>
+
+<p>Fires an event when the form has been succesfully submited and data has made it to sync.</p>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"sync_form_success"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// do something here</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<p>To listen to the event of a sync form with a <code class="prettyprint">data-sync-form-id</code>:</p>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"sync_form_success-&lt;FULL FORM ID&gt;"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// do something here</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<p>so in our example form</p>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span>
+    <span class="s2">"sync_form_success-79826d9f-3930-4630-82ae-d1e25b5bfa6e"</span><span class="p">,</span>
+    <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// do something here</span>
+    <span class="p">}</span>
+  <span class="p">);</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<h2 id="on-submit-fail">On Submit Fail</h2>
+
+<p>This event fires when there was an issue sending the data to Sync, usually from a server error.</p>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"sync_form_submit_fail"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// do something here</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<blockquote>
+<p>To listen to the event of a sync form with a <code class="prettyprint">data-sync-form-id</code>:</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"sync_form_submit_fail-&lt;FULL FORM ID&gt;"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// do something here</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<blockquote>
+<p>in our example form</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span>
+    <span class="s2">"sync_form_submit_fail-79826d9f-3930-4630-82ae-d1e25b5bfa6e"</span><span class="p">,</span>
+    <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// do something here</span>
+    <span class="p">}</span>
+  <span class="p">);</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<hr>
+
+<h2 id="google-tag-features">Google Tag Features</h2>
+
+<p>Sync V2 forms also push in events to the <code class="prettyprint">dataLayer</code> for Google Tag manager to hook into. This happens at the <code class="prettyprint">Submit</code> event after the form has been succesfully submitted.</p>
+
+<blockquote>
+<p>No data-id attribute</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">dataLayer</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span> <span class="na">event</span><span class="p">:</span> <span class="s2">"sync_form_conversion"</span> <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<blockquote>
+<p>To listen to the event of a sync form with a <code class="prettyprint">data-sync-form-id</code>:</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">dataLayer</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span> <span class="na">event</span><span class="p">:</span> <span class="s2">"sync_form_conversion-&lt;FULL FORM ID&gt;"</span> <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<blockquote>
+<p>in our example form</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">dataLayer</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span> <span class="na">event</span><span class="p">:</span> <span class="s2">"sync_form_conversion-79826d9f-3930-4630-82ae-d1e25b5bfa6e"</span> <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<h2 id="facebook-pixel-features">Facebook Pixel Features</h2>
+
+<p>Sync V2 forms will always fire facebook pixel events as a standard feature. This will require the <code class="prettyprint">facebook pixel id</code> to be configured when building the sync form. This will fire the <code class="prettyprint">track</code> feature of the facebook sdk and contain a data value of <code class="prettyprint">CompleteRegistration</code>. This will also use the <a href="https://developers.facebook.com/ads/blog/post/2016/05/31/advanced-matching-pixel/">advanced tracking feature</a> where user information is submitted to facebook.</p>
+
+<p>This requries the facebook <code class="prettyprint">fpq</code> be present on the same site as the sync form. Sync will reinit the <code class="prettyprint">fbq</code> sdk with it&rsquo;s own configured <code class="prettyprint">facebook pixel id</code>, pass the advanced tracking data, then finally pass the <code class="prettyprint">CompleteRegistration</code> event via:</p>
+
+<blockquote>
+<p>Facebook CompleteRegistration Event</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;script&gt;</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">fbq</span><span class="p">(</span>
+    <span class="s2">"init"</span><span class="p">,</span>
+    <span class="nx">facebook_pixel_id</span><span class="p">,</span> <span class="c1">// configured facebook pixel id</span>
+    <span class="nx">facebookData</span> <span class="c1">// advanced tracking data</span>
+  <span class="p">);</span>
+
+  <span class="nb">window</span><span class="p">.</span><span class="nx">fbq</span><span class="p">(</span><span class="s2">"track"</span><span class="p">,</span> <span class="s2">"CompleteRegistration"</span><span class="p">);</span> <span class="c1">// registration event</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+<p>With these events you should be able to take full advantage of V2 Forms! 🚀</p>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="html">html</a>
                 <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
